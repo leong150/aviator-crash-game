@@ -1,3 +1,322 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "prettier",
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error"
+    ],
+    "react-native/no-inline-styles": 0,
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "quotes": [
+      2,
+      "backtick",
+      {
+        "allowTemplateLiterals": true,
+        "avoidEscape": true
+      }
+    ],
+    "no-var": [
+      "error"
+    ],
+    "curly": [
+      "error"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "eqeqeq": [
+      "error"
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true,
+        "overrides": {
+          "return": {
+            "after": true
+          },
+          "throw": {
+            "after": true
+          },
+          "case": {
+            "after": true
+          }
+        }
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 1000,
+        "tabWidth": 2
+      }
+    ],
+    "no-cond-assign": [
+      "error",
+      "always"
+    ],
+    "no-return-assign": [
+      "error",
+      "always"
+    ],
+    "prefer-const": [
+      "error"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-new-object": [
+      "error"
+    ],
+    "object-shorthand": [
+      "error"
+    ],
+    "no-prototype-builtins": [
+      "error"
+    ],
+    "prefer-object-spread": [
+      "error"
+    ],
+    "no-array-constructor": [
+      "error"
+    ],
+    "prefer-destructuring": [
+      "error"
+    ],
+    "no-eval": [
+      "error"
+    ],
+    "no-useless-escape": [
+      "error"
+    ],
+    "func-style": [
+      "error",
+      "expression",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    "space-before-function-paren": [
+      "off"
+    ],
+    "space-before-blocks": [
+      "error"
+    ],
+    "no-param-reassign": [
+      "error"
+    ],
+    "prefer-spread": [
+      "error"
+    ],
+    "function-paren-newline": [
+      "error",
+      "multiline-arguments"
+    ],
+    "prefer-arrow-callback": [
+      "error"
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "arrow-body-style": [
+      "error",
+      "always"
+    ],
+    "no-confusing-arrow": [
+      "error"
+    ],
+    "implicit-arrow-linebreak": [
+      "error"
+    ],
+    "no-duplicate-imports": [
+      "error"
+    ],
+    "object-curly-newline": [
+      "error"
+    ],
+    "no-iterator": "error",
+    "no-restricted-syntax": [
+      "error",
+      "WithStatement",
+      "BinaryExpression[operator=\"in\"]",
+      "ForStatement",
+      "DoWhileStatement",
+      "WhileStatement"
+    ],
+    "dot-notation": [
+      "error"
+    ],
+    "no-restricted-properties": [
+      "error"
+    ],
+    "no-undef": [
+      "error"
+    ],
+    "no-multi-assign": [
+      "error"
+    ],
+    "no-plusplus": [
+      "error"
+    ],
+    "no-unused-vars": [
+      "off"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-case-declarations": [
+      "error"
+    ],
+    "no-nested-ternary": [
+      "error"
+    ],
+    "no-unneeded-ternary": [
+      "error"
+    ],
+    "no-mixed-operators": [
+      "error"
+    ],
+    "nonblock-statement-body-position": [
+      "error"
+    ],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "no-else-return": [
+      "error"
+    ],
+    "spaced-comment": [
+      "error"
+    ],
+    "space-infix-ops": [
+      "error"
+    ],
+    "newline-per-chained-call": [
+      "error"
+    ],
+    "no-whitespace-before-property": [
+      "error"
+    ],
+    "padded-blocks": [
+      "error",
+      "never"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 2,
+        "maxEOF": 0
+      }
+    ],
+    "space-in-parens": [
+      "error"
+    ],
+    "array-bracket-spacing": [
+      "error"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "block-spacing": [
+      "error",
+      "always"
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "computed-property-spacing": [
+      "error"
+    ],
+    "func-call-spacing": [
+      "error"
+    ],
+    "key-spacing": [
+      "error"
+    ],
+    "no-trailing-spaces": [
+      "error"
+    ],
+    "comma-style": [
+      "error",
+      "last"
+    ],
+    "no-new-wrappers": [
+      "error"
+    ],
+    "radix": [
+      "error"
+    ],
+    "new-cap": [
+      "error"
+    ],
+    "no-underscore-dangle": [
+      "error"
+    ],
+    "no-restricted-globals": [
+      "error",
+      "isNaN",
+      "isFinite"
+    ],
+    "no-dupe-keys": "error",
+    "import/no-anonymous-default-export": [
+      "error",
+      {
+        "allowArray": true,
+        "allowArrowFunction": true,
+        "allowAnonymousClass": true,
+        "allowAnonymousFunction": true,
+        "allowCallExpression": true, // The true value here is for backward compatibility
+        "allowNew": true,
+        "allowLiteral": true,
+        "allowObject": true
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
+  }
 }
