@@ -1,0 +1,2 @@
+export const CRASH_PARAMS = `CRASH_PARAMS`;
+export const SUBMIT_NET_AMOUNT = `SUBMIT_NET_AMOUNT`;
