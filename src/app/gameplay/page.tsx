@@ -69,6 +69,7 @@ const Component = () => {
     reset: !isRunning,
     pause: !isRunning,
     config: { duration: 0 },
+    delay: 1000,
   });
 
   const crashParams = useCrashParams({ enabled: true });
@@ -166,7 +167,7 @@ const Component = () => {
           handleStartBet();
           isFirstTimeLoaded.current = false;
         },
-        isFirstTimeLoaded.current ? 0 : 3000,
+        isFirstTimeLoaded.current ? 0 : 5000,
       );
     }
   }, [crashParams.isSuccess, handleStartBet, isOpenBetting, isRunning]);
@@ -280,9 +281,26 @@ const Component = () => {
       <div className='flex h-full w-full flex-col items-center justify-between p-8 text-white'>
         <span className='text-4xl font-bold'>🚀 Aviator Crash Game</span>
         {isOpenBetting && (
-          <animated.div className={`flex flex-1 items-center justify-center`}>
+          <animated.div
+            className={`flex flex-1 flex-col items-center justify-center`}
+          >
             <animated.span
-              className={`font-bold`}
+              className={`-mt-12 text-[4rem] font-bold`}
+              style={{
+                opacity: countDown.value.to((value) => {
+                  const opacityFraction = value % 1;
+
+                  if (opacityFraction > 0.7 && value > 14) {
+                    return (1 - opacityFraction) / 0.3;
+                  }
+
+                  return 1;
+                }),
+                transition: `opacity 0.2s`,
+              }}
+            >{`Game starts in`}</animated.span>
+            <animated.span
+              className={`h-[10rem] font-bold`}
               style={{
                 fontSize: countDown.value.to((value) => {
                   const sizeFraction = value % 1;
@@ -327,31 +345,59 @@ const Component = () => {
             <animated.div
               style={{
                 backgroundImage: `url(/rocket.png)`,
-                x: multiplierSpring.value.to(() => {
-                  return (Math.random() - 0.5) * 10;
-                }), // horizontal shake
-                y: multiplierSpring.value.to(() => {
-                  return (Math.random() - 0.5) * 10;
-                }), // vertical shake
-                rotate: multiplierSpring.value.to(() => {
-                  return (Math.random() - 0.5) * 8 + 45;
-                }), // slight rotation
-              }}
-              className={`z-10 h-[10rem] w-[10rem] rotate-45 bg-cover bg-center`}
-            />
-          </div>
-        )}
+                x: multiplierSpring.value.to((value) => {
+                  // horizontal shake
+                  if (value > 1.5) {
+                    return (Math.random() - 0.5) * 10;
+                  }
 
-        {!isRunning && !isOpenBetting && (
-          <div className='flex flex-col items-center justify-center gap-4'>
-            {isCashedOut ? (
+                  return 0; // No shake when multiplier is low
+                }),
+                y: multiplierSpring.value.to((value) => {
+                  // vertical shake
+                  if (value > 1.5) {
+                    return (Math.random() - 0.5) * 10;
+                  }
+
+                  return 0; // No shake when multiplier is low
+                }),
+                rotate: multiplierSpring.value.to((value) => {
+                  // slight rotation
+                  if (value > 1.2) {
+                    return (Math.random() - 0.5) * 8 + 45;
+                  }
+
+                  return 45; // No rotation when multiplier is low
+                }),
+              }}
+              className={`inset-0 z-10 h-[10rem] w-[10rem] bg-cover bg-center`}
+            >
               <NextImage
                 src='/rocket.png'
                 alt='rocket'
-                className='h-[10rem] w-[10rem] rotate-45'
+                className='h-full w-full object-cover'
                 width={300}
                 height={300}
               />
+            </animated.div>
+          </div>
+        )}
+
+        {!isFirstTimeLoaded.current && !isRunning && !isOpenBetting && (
+          <div className='flex flex-col items-center justify-center gap-4'>
+            {isCashedOut ? (
+              <>
+                <span className='text-4xl font-bold'>{`You have won $ ${utils.addCommasToNumber(
+                  multiplier * parseFloat(betAmount),
+                )}`}</span>
+                <NextImage
+                  src='/rocket.png'
+                  alt='rocket'
+                  className='h-[10rem] w-[10rem] rotate-45'
+                  width={300}
+                  height={300}
+                />
+              </>
             ) : (
               <NextImage
                 src='/burst.png'
@@ -376,11 +422,14 @@ const Component = () => {
             </span>
           )}
 
-          {!isRunning && !isOpenBetting && !isCashedOut && (
-            <span className='text-6xl font-bold'>
-              {utils.addCommasToNumber(crashPoint)}x
-            </span>
-          )}
+          {!isFirstTimeLoaded.current &&
+            !isRunning &&
+            !isOpenBetting &&
+            !isCashedOut && (
+              <span className='text-4xl font-bold'>
+                {utils.addCommasToNumber(crashPoint)}x
+              </span>
+            )}
 
           {!isRunning && !isOpenBetting && isCashedOut && (
             <span className='text-6xl font-bold'>
